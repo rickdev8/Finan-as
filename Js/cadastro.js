@@ -1,6 +1,6 @@
 
 async function get() {
-    const response = await fetch('https://api-k7y1.onrender.com/usuarios');
+    const response = await fetch('https://api-267v.onrender.com/usuarios');
     if (!response.ok) {
       throw new Error('Erro ao obter os dados');
     }
@@ -9,7 +9,7 @@ async function get() {
 }
 
 async function post(conta){
-    await fetch('https://api-k7y1.onrender.com/usuarios', {
+    await fetch('https://api-267v.onrender.com/usuarios', {
       
       method: 'POST', 
       headers: {
