@@ -108,6 +108,7 @@ async function post(conta){
     } 
     window.alert('Conta criada com sucesso!')
     await post(dadosconta);  
+    window.location.href = "index.html"
   }
 
 }
