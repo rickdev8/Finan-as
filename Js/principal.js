@@ -125,6 +125,7 @@ async function edit(transacoest) {
 
   const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${idf}`, {
     method: 'PUT',
+    mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -144,6 +145,7 @@ async function editartransacao(novaTransacao){
 
   const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}/${transacaoId}`, {
     method: 'PUT',
+    mode: 'no-cors',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -269,6 +271,7 @@ async function deleteTransacao(userId, transacaoId) {
   try {
     const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}`, {
       method: 'DELETE',
+      mode: 'no-cors',
       headers: {
           'Content-Type': 'application/json',
       },
