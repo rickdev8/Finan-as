@@ -1,5 +1,5 @@
 async function get() {
-    const response = await fetch('https://api-267v.onrender.com/usuarios');
+    const response = await fetch('https://api-1-gscb.onrender.com/usuarios');
     if (!response.ok) {
       throw new Error('Erro ao obter os dados');
     }
