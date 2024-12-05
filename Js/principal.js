@@ -123,7 +123,7 @@ async function edit(transacoest) {
   const idf = id.ids;
   contador += 1;
 
-  const response = await fetch(`https://api-1-v0r5.onrender.com/usuarios/${idf}`, {
+  const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${idf}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
