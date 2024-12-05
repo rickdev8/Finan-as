@@ -142,7 +142,7 @@ async function editartransacao(novaTransacao){
   const transacaoId = id.lista[index].transacaoId;
   const userId = id.ids;
 
-  const response = await fetch(`https://api-1-v0r5.onrender.com/usuarios/${userId}/${transacaoId}`, {
+  const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}/${transacaoId}`, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
@@ -267,7 +267,7 @@ async function dadosretornados() {
 
 async function deleteTransacao(userId, transacaoId) {
   try {
-    const response = await fetch(`https://api-1-v0r5.onrender.com/usuarios/${userId}`, {
+    const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}`, {
       method: 'DELETE',
       headers: {
           'Content-Type': 'application/json',
