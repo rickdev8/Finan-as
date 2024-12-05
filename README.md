@@ -1,4 +1,4 @@
-escrição do Projeto
+Descrição do Projeto
 Este projeto é um sistema de controle financeiro, que permite aos usuários registrar, editar e excluir transações financeiras. Ele fornece uma interface interativa para gerenciar as transações de receita e despesa, além de exibir gráficos financeiros para facilitar a visualização do fluxo de caixa. O sistema é integrado com um backend utilizando Express, Prisma e MongoDB para armazenar e manipular os dados.
 
 Funcionalidades:
