@@ -12,6 +12,7 @@ async function post(conta){
     await fetch('https://api-k7y1.onrender.com/usuarios', {
       
       method: 'POST', 
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json', 
       },
