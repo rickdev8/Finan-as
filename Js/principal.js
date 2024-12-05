@@ -1,5 +1,5 @@
 async function get() {
-  const response = await fetch('https://api-k7y1.onrender.com/usuarios');
+  const response = await fetch('https://api-267v.onrender.com/usuarios');
   if (!response.ok) {
     throw new Error('Erro ao obter os dados');
   }
@@ -123,7 +123,7 @@ async function edit(transacoest) {
   const idf = id.ids;
   contador += 1;
 
-  const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${idf}`, {
+  const response = await fetch(`https://api-267v.onrender.com/usuarios/${idf}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ async function editartransacao(novaTransacao){
   const transacaoId = id.lista[index].transacaoId;
   const userId = id.ids;
 
-  const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}/${transacaoId}`, {
+  const response = await fetch(`https://api-267v.onrender.com/usuarios/${userId}/${transacaoId}`, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
@@ -267,7 +267,7 @@ async function dadosretornados() {
 
 async function deleteTransacao(userId, transacaoId) {
   try {
-    const response = await fetch(`https://api-k7y1.onrender.com/usuarios/${userId}`, {
+    const response = await fetch(`https://api-267v.onrender.com/usuarios/${userId}`, {
       method: 'DELETE',
       headers: {
           'Content-Type': 'application/json',
