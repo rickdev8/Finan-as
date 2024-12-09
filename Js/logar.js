@@ -1,5 +1,5 @@
 async function get() {
-    const response = await fetch('https://api-1-v0r5.onrender.com/usuarios');
+    const response = await fetch('http://localhost:3000/usuarios');
     if (!response.ok) {
       throw new Error('Erro ao obter os dados');
     }
@@ -45,7 +45,7 @@ async function get() {
             usuariologado = true
             localStorage.setItem("usuario", usuario)
             localStorage.setItem("id", index)
-            window.location.href = 'pages/principal.html';  
+            window.location.href = 'principal.html';  
         } else {
             alert('Usuário ou senha inválidos!');
         }

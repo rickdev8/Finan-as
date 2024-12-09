@@ -1,6 +1,6 @@
 
 async function get() {
-    const response = await fetch('https://api-1-v0r5.onrender.com/usuarios');
+    const response = await fetch('https://api-1-gscb.onrender.com/usuarios');
     if (!response.ok) {
       throw new Error('Erro ao obter os dados');
     }
@@ -9,7 +9,7 @@ async function get() {
 }
 
 async function post(conta){
-    await fetch('https://api-1-v0r5.onrender.com/usuarios', {
+    await fetch('https://api-1-gscb.onrender.com/usuarios', {
       
       method: 'POST', 
       headers: {
@@ -108,6 +108,7 @@ async function post(conta){
     } 
     window.alert('Conta criada com sucesso!')
     await post(dadosconta);  
+    window.location.href = 'index.html'
   }
 
 }
