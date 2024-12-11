@@ -1,4 +1,4 @@
-/* Estilo básico para a tela de cadastro */
+
 body {
     background-image: url('Assets/images/white-cubes-3d-background.jpg');
     background-size: cover; 
@@ -67,7 +67,6 @@ select {
     transition: border-color 0.3s ease-in-out;
 }
 
-
 input:focus, select:focus {
     border-color: #111027;
     outline: none;
@@ -78,7 +77,6 @@ input[type="checkbox"] {
     margin-right: 8px;
 }
 
-/* Estilo do botão de envio */
 button {
     font-weight: 600;
     width: 100%;

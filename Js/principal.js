@@ -91,19 +91,27 @@ async function adctransaction() {
     return;
   }
   
-
 }
 
 async function chamarfunc(transacoest) {
-  await edit(transacoest);
+  await decidir(transacoest)
   await atualizartabela(); 
   await historico(); 
   await dadosretornados();
   await retornarids(transacoest);
-  console.log(transacoest)
-  
+  await historicosM()
 }
 
+
+async function decidir(transacoest){
+  const novaTransacao = transacoest[index]
+  if(index != null){
+    await editartransacao(novaTransacao)
+    index = null
+  } else {
+    await edit(transacoest)
+  }
+}
 
 async function retornarids(transacoest) {
   const id = await dadosretornados(); 
@@ -138,6 +146,7 @@ async function edit(transacoest) {
 }
 
 async function editartransacao(novaTransacao){
+
   const id = await dadosretornados();
   const transacaoId = id.lista[index].transacaoId;
   const userId = id.ids;
@@ -156,82 +165,16 @@ async function editartransacao(novaTransacao){
     throw new Error('Erro ao editar a transação');
   }
  await historico()
+ await historicosM()
  await atualizartabela()
 }
 
-async function adcdiv(i) {
-  const tr = document.getElementById('tbody');
-  const div1 = document.querySelector('.tr1');
-  
-  div1.style.display = 'none';
-
-  let divedittransacao = `
-                        <td class="tr2" id="tipoh"><input id="tipo" type="text" placeholder="Digite o novo Tipo (Entrada) ou (Saída)"></td>                 
-                        <td id="desch"><input id="desc" type="text" placeholder="Digite uma nova descrição"></td>                   
-                        <td id="categh"><input id="cate" type="text" placeholder="Digite uma nova categoria"></td>                     
-                        <td id="valorh"><input id="valor" type="number" placeholder="Digite um novo valor"></td>               
-                        <td id="datah"><input id="data" type="date" value="2013-02-21" required placeholder="Digite uma nova data"></td>
-                        <div>
-                            <button onclick="concluir()">Concluir</button>
-                        </div>
-`;
-
-  
-  tr.innerHTML = divedittransacao;
-
-  const div2 = document.querySelector('.tr2');
-  div2.style.display = 'flex';
-  index = i;
-  
-}
-
-async function concluir() {
-  const tipo = document.getElementById('tipo').value.toLowerCase();
-  const desc = document.getElementById('desc').value;
-  const cate = document.getElementById('cate').value;
-  const valor = parseFloat(document.getElementById('valor').value);
-  const data = document.getElementById('data').value;
-
-  let novaTransacao = {
-    transacaoId: crypto.randomUUID(),
-    tipo: tipo,
-    total: valor,
-    receita: "",
-    despesa: "",
-    categoria: cate,
-    descricao: desc,
-    valor: valor,
-    data: data
-  };
-
-  const verificador = verificar(tipo, desc, cate, valor)
-
-  let total = 0;
-  if (tipo === 'entrada') {
-    total += valor;
-    novaTransacao.total = total;
-    novaTransacao.receita = valor;
-    novaTransacao.tipo = 'Entrada';
-    novaTransacao.categoria= 'Receita'
-  } else if (tipo === 'saida') {
-    total -= valor;
-    novaTransacao.total = total;
-    novaTransacao.despesa = valor;
-    novaTransacao.tipo = 'Saída';
-    novaTransacao.categoria = 'Despesa'
-  }
-
-  if(verificador){
-    await editartransacao(novaTransacao)
-  }
-
-  
+function obterindex(i){
+  index = i
 }
 function verificar(tipo, desc, cate, valor) {
-
   let verificador = false;
 
-  // Verificar se o comprimento de algum dos parâmetros excede 23
   if (desc.length > 23 || cate.length > 23 || valor.length > 23) {
       window.alert("Número máximo de caracteres excedido!");
   } else {
@@ -243,8 +186,7 @@ function verificar(tipo, desc, cate, valor) {
     window.alert("Insira um tipo válido!")
     verificador = false
   }
-  console.log(cate, desc, valor)
-
+  
   return verificador;
 }
 
@@ -289,6 +231,7 @@ async function deleteTransacao(userId, transacaoId) {
   }
   await atualizartabela();
   await historico();
+  await historicosM()
 }
 
 async function atualizartabela() {
@@ -314,7 +257,8 @@ async function atualizartabela() {
   grafics(receitas, despesas); 
 }
 
-async function historico() {
+async function historico(transacoesfiltradas) {
+
   let data = new Date();
   let ano = data.getFullYear();
   let mes = String(data.getMonth() + 1).padStart(2, '0'); 
@@ -324,7 +268,8 @@ async function historico() {
   document.getElementById('date').value = dataformatada;
 
   const lista = await dadosretornados();
-  const transacoesfinais = lista.lista; 
+  const transacoesfinais = lista.lista;
+
   contarTransacoesPorMes();
   const tr = document.getElementById('tbody');
   let div = '';
@@ -334,18 +279,40 @@ async function historico() {
     if (isNaN(valor)) {
       valor = 0;
     }
-    div += ` 
-      <tr class="tr1">               
-        <td id="tipoh">${transacoesfinais[i].tipo}</td>                 
-        <td id="desch">${transacoesfinais[i].descricao}</td>                   
-        <td id="categh">${transacoesfinais[i].categoria}</td>                     
-        <td id="valorh">${transacoesfinais[i].total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>               
-        <td id="data" class="income">${transacoesfinais[i].data} </td>
-        <td> <button id="lixeira" onclick="retornarids(${i})" class="fa-solid fa-trash"></button><button id="edit" class="fa-solid fa-pen" onclick="adcdiv(${i})"></button></td>
-            
+
+    if(transacoesfiltradas != null){
+      console.log(false)
+
+      for(let i = 0; i < transacoesfiltradas.length; i++){
        
-      </tr>`;
+      }
+      const transacoesfiltradasf= transacoesfiltradas[i]
+
+      div += ` 
+    <tr class="tr1">               
+      <td id="tipoh">${transacoesfiltradasf.tipo}</td>                 
+      <td id="desch">${transacoesfiltradasf.descricao}</td>                   
+      <td id="categh">${transacoesfiltradasf.categoria}</td>                     
+      <td id="valorh">${transacoesfiltradasf.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>               
+      <td id="data" class="income">${transacoesfiltradasf.data} </td>
+      <td> <button id="lixeira" onclick="retornarids(${i})" class="fa-solid fa-trash"></button><button id="edit" class="fa-solid fa-pen" onclick="obterindex(${i})"></button></td>
+    </tr>`;
+      
+      
+  } else {
+    div += ` 
+    <tr class="tr1">               
+      <td id="tipoh">${transacoesfinais[i].tipo}</td>                 
+      <td id="desch">${transacoesfinais[i].descricao}</td>                   
+      <td id="categh">${transacoesfinais[i].categoria}</td>                     
+      <td id="valorh">${transacoesfinais[i].total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>               
+      <td id="data" class="income">${transacoesfinais[i].data}</td>
+      <td> <button id="lixeira" onclick="retornarids(${i})" class="fa-solid fa-trash"></button><button id="edit" class="fa-solid fa-pen" onclick="obterindex(${i})"></button></td>
+    </tr>`;
+      
   }
+
+}
 
   tr.innerHTML = div;
 }
@@ -378,29 +345,28 @@ async function contarTransacoesPorMes() {
   });
   return resumoPorMes;
 }
-// Selecionando os elementos
-// Selecionando os elementos
+
 const menuHamburguer = document.querySelector(".menu-hamburguer");
 const nav = document.querySelector("nav");
 const menuLinks = document.querySelectorAll("nav a"); 
 const fechar = document.querySelector('.close-btn');
 
-// Função para abrir/fechar o menu ao clicar no ícone de hambúrguer
 menuHamburguer.addEventListener("click", () => {
-    nav.classList.toggle("active");  // Adiciona ou remove a classe 'active' para abrir/fechar o menu
-});
-
-// Fechar o menu ao clicar no botão "X"
+    nav.classList.toggle("active"); 
+})
 fechar.addEventListener('click', () => {
-    nav.classList.remove("active");  // Remove a classe 'active' para fechar o menu
-});
+    nav.classList.remove("active");  
+})
 
-// Fechar o menu quando um link for clicado
 menuLinks.forEach(link => {
     link.addEventListener("click", () => {
-        nav.classList.remove("active");  // Remove a classe 'active' quando qualquer link for clicado
+        nav.classList.remove("active"); 
     });
-});
+})
+
+async function filtrar(){
+  console.log(await dadosretornados())
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
   radio()
@@ -408,9 +374,112 @@ document.addEventListener('DOMContentLoaded', async () => {
   await historico();
   await dadosretornados();
   await get()
+  await historicosM()
   
-
 });
+
+const guiabutton = document.getElementById('guia')
+
+guiabutton.addEventListener('click', ()=>{
+  window.location.href = 'guia.html'
+})
+
+const showOptionsButton = document.getElementById('showOptionsButton');
+        const optionsList = document.getElementById('optionsList');
+
+        showOptionsButton.addEventListener('click', function() {
+            optionsList.classList.toggle('active');
+        });
+
+        optionsList.addEventListener('click', function(event) {
+            if (event.target && event.target.matches('div')) {
+                showOptionsButton.textContent = event.target.textContent;
+                optionsList.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.button-container')) {
+                optionsList.classList.remove('active');
+            }
+        });
+
+async function filtrar() {
+    const buttonolddata = document.getElementById('fdata');
+    const idmaiorp = document.getElementById('fmaiorp');
+    const idmenorp = document.getElementById('fmenorp');
+    const normal = document.getElementById('fnormal')
+    
+    const dados = await dadosretornados();
+    
+  
+    let filtro;
+
+      buttonolddata.addEventListener('click', () => {
+      const sorted = dados.lista.slice().sort((a, b) => new Date(a.data) - new Date(b.data));
+      filtro = sorted;
+      historico(filtro); 
+    });
+        
+    idmaiorp.addEventListener('click', () => {
+      const maiorpreco = dados.lista.slice().sort((a, b) => b.total - a.total);
+      filtro = maiorpreco;
+      historico(filtro); 
+    });
+        
+    idmenorp.addEventListener('click', () => {
+      const menorpreco = dados.lista.slice().sort((a, b) => a.total - b.total);
+      filtro = menorpreco;
+      historico(filtro);  
+    });
+
+    normal.addEventListener('click', async () =>{
+      await historico()
+    })
+
+    historicosM()
+  }
+  async function historicosM() {
+    let div = '<p>Sem dados</p>';
+
+    const maioresreceitas = document.getElementById('maioresreceitas');
+    const maioresdespesas = document.getElementById('maioresdespesas');
+
+    let maioresR = '';
+    let menoresR = '';
+
+    const dados = await dadosretornados();
+
+    const maiores = dados.lista.slice().sort((a, b) => b.total - a.total);
+    let finalmaior = maiores.filter(produto => produto.tipo === "Entrada");
+
+    const menores = dados.lista.slice().sort((a, b) => a.total - b.total);
+    let finalmenor = menores.filter(produto => produto.tipo === "Saída");
+
+    for (let i = 0; i < finalmaior.slice(0, 3).length; i++) {
+        maioresR += `<li>${finalmaior[i].descricao}</li>`;
+    }
+
+    for (let i = 0; i < finalmenor.slice(0, 3).length; i++) {
+        menoresR += `<li>${finalmenor[i].descricao}</li>`;
+    }
+
+    if (finalmaior.length === 0) {
+        maioresreceitas.innerHTML = div;
+    } else {
+        maioresreceitas.innerHTML = maioresR;
+    }
+
+    if (finalmenor.length === 0) {
+        maioresdespesas.innerHTML = div;
+    } else {
+        maioresdespesas.innerHTML = menoresR;
+    }
+}
+  const btnsair = document.getElementById ('sair')
+  btnsair.addEventListener('click', ()=>{
+    window.location.href = 'index.html'
+  })
 
 const ctx = document.getElementById('myChart')
 const evo = document.getElementById('evo')
@@ -430,7 +499,7 @@ async function grafics(receitas, despesas) {
       labels: ['Despesas', 'Receitas'],
       datasets: [{
         label: 'Distribuição',
-        data: [despesas, receitas], 
+        data: [despesas, receitas],
         backgroundColor: [
           'rgb(255, 99, 132)', 
           'rgb(54, 162, 235)' 
@@ -455,22 +524,21 @@ async function grafics(receitas, despesas) {
     }
   });
 
-
   if (lineChart) {
     lineChart.destroy(); 
   }
-  let resumomes = await  contarTransacoesPorMes()
+
+  let resumomes = await contarTransacoesPorMes();
+
   lineChart = new Chart(evo, {
     type: 'line',
     data: {
-      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], // Labels para os meses
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], 
       datasets: [{
         label: 'Evolução de Receitas e Despesas',
         data: resumomes, 
-        fill:false,
-        backgroundColor: [
-          'rgb(75, 192, 192)'
-        ],
+        fill: false,
+        backgroundColor: 'rgb(75, 192, 192)',
         tension: 0.1,
         borderWidth: 1
       }]
@@ -482,5 +550,5 @@ async function grafics(receitas, despesas) {
         }
       }
     }
-  });
+  })
 }

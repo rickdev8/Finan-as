@@ -1,60 +1,46 @@
 async function get() {
-    const response = await fetch('http://localhost:3000/usuarios');
+    const response = await fetch('https://api-1-gscb.onrender.com/usuarios');
     if (!response.ok) {
-      throw new Error('Erro ao obter os dados');
+        throw new Error('Erro ao obter os dados');
     }
-    const dados = await response.json(); 
-    return dados;
-  }
+    return await response.json(); 
+}
 
-  function validardados(){
-    const usuario = document.getElementById('name').value
+function validardados() {
+    const usuario = document.getElementById('name').value;
     const senha = document.getElementById('senha').value; 
-    if(usuario && senha !== ""){
-        return {usuario: usuario, senha: senha}
+    if (usuario && senha !== "") {
+        return { usuario, senha };
     } else {
-        window.alert("Verifique os dados e tente novamente!")
-        return;
+        window.alert("Verifique os dados e tente novamente!");
+        return null;
     }
+}
 
-  }
-
-
-
- async function logar(event) {
+async function logar(event) {
     event.preventDefault(); 
-    const usuario = validardados().usuario
-    const senha = validardados().senha
-    let index = ''   
 
+    const dados = validardados();
+    if (!dados) return; 
+
+    const { usuario, senha } = dados;
     try {
-
         const usuarios = await get();  
-        let usuarioValido = false;
+        const usuarioValido = usuarios.some(u => u.conta.nome === usuario && u.conta.senha === senha);
 
-        for (let i = 0; i < usuarios.length; i++) {
-            if (usuario === usuarios[i].conta.nome && senha === usuarios[i].conta.senha && typeof usuario === "string") {
-                index = usuarios[i].id
-                usuarioValido = true;
-                logado = true
-                break;
-            }
-        }
-  
         if (usuarioValido) {
-            usuariologado = true
-            localStorage.setItem("usuario", usuario)
-            localStorage.setItem("id", index)
+            const usuarioEncontrado = usuarios.find(u => u.conta.nome === usuario && u.conta.senha === senha);
+            localStorage.setItem("usuario", usuario);
+            localStorage.setItem("id", usuarioEncontrado.id);
             window.location.href = 'principal.html';  
         } else {
             alert('Usuário ou senha inválidos!');
         }
-  
+
     } catch (error) {
         console.error('Erro:', error);
         alert('Houve um erro ao tentar fazer login. Tente novamente mais tarde.');
     }
-  
-  }
-  
-  document.getElementById('loginForm').addEventListener('submit', logar);
+}
+
+document.getElementById('loginForm').addEventListener('submit', logar);

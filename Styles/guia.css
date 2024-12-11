@@ -1,0 +1,68 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+}
+
+.guide-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 900px;
+    width: 90%;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.guide-container h1 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.guide-container h2 {
+    font-size: 1.4rem;
+    color: #34495e;
+    margin-top: 20px;
+}
+
+.guide-container p {
+    margin-bottom: 15px;
+}
+
+.guide-container ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.guide-container ul li {
+    margin-bottom: 10px;
+}
+
+.guide-container blockquote {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #34495e;
+    margin: 20px 0;
+    font-style: italic;
+}
+
+
+.guide-container button {
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.guide-container button:hover {
+    background-color: #357ABD;
+}

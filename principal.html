@@ -16,10 +16,8 @@
             <h1>Bem-vindo(a) <span id="nome"></span></h1>
         </div>
 
-        <!-- Menu Hamburguer para celular -->
         <div class="menu-hamburguer" onclick="toggleMenu()">&#9776;</div>
 
-        <!-- Navegação -->
         <nav id="menu">
             <button class="close-btn">X</button>
             <ul>
@@ -27,12 +25,12 @@
                 <li><a href="#tbody">Histórico</a></li>
                 <li><a href="#categorias">Detalhes</a></li>
                 <li><a href="#relatorios">Gráficos</a></li>
+                <li><a id="guia" href="#guia">Guia de usuário</a></li>
+                <li><a id="sair" href="#categorias">Sair</a></li>
+
             </ul>
         </nav>
     </header>
-
-    
-
     <main>
         <!-- Dashboard Section -->
         <section id="dashboard">
@@ -100,6 +98,18 @@
                     </div>
                 </div>
                 <h2>Histórico de Transações</h2>
+                <div class="titlef">
+                            <h2>Filtros</h2>
+                        </div>
+                        <div class="button-container">
+                            <button onclick="filtrar()" id="showOptionsButton">Filtrar por</button>
+                            <div class="options" id="optionsList">
+                                <div id="fdata">Mais antigos</div>
+                                <div id="fmaiorp" >Maior preço</div>
+                                <div id="fmenorp">Menor preço</div>
+                                <div id="fnormal">Normal</div>
+                            </div>
+                        </div>
                 <div class="table-container">
                     <table>
                     
@@ -135,22 +145,18 @@
 
         <section id="categorias">
             <div class="container">
-                <h2>Categorias de Despesas e Receitas</h2>
+                <h2>Transações</h2>
                 <div class="category-list">
                     <div class="category">
-                        <h3>Receitas</h3>
-                        <ul>
-                            <li>Venda de produtos</li>
-                            <li>Consultorias</li>
-                            <li>Investimentos</li>
+                        <h3>Maiores ganhos</h3>
+                        <ul id="maioresreceitas">
+                            
                         </ul>
                     </div>
                     <div class="category">
-                        <h3>Despesas</h3>
-                        <ul>
-                            <li>Aluguel</li>
-                            <li>Material de escritório</li>
-                            <li>Salários</li>
+                        <h3>Maiores gastos</h3>
+                        <ul id="maioresdespesas">
+                        
                         </ul>
                     </div>
                 </div>
@@ -179,11 +185,10 @@
         </section>
     </main>
     
-
     <footer>
         <p>&copy; 2024 Monitoramento de Finanças</p>
     </footer>
-    <script src="Js/index.js"></script>
+    <script src="Js/principal.js"></script>
     
 </body>
 

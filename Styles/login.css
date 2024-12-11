@@ -1,7 +1,7 @@
 /* Estilo básico para a tela de login */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-image: url('Assets/images/white-cubes-3d-background.jpg');
+    background-image: url('/Assets/images/white-cubes-3d-background.jpg');
     background-color: #f4f7fc;
     background-size: cover; 
     background-position: center; 
