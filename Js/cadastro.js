@@ -53,7 +53,7 @@ async function cadastrarusuario(event) {
           return;
       }
 
-      if (idade > 18 && idade < 120) {
+      if (idade >= 14 && idade < 120) {
           conta.idade = idade;
       } else {
           window.alert('Idade de usuário inválida!');
