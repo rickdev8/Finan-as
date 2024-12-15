@@ -104,13 +104,15 @@ async function chamarfunc(transacoest) {
 
 
 async function decidir(transacoest){
-  const novaTransacao = transacoest[index]
-  if(index != null){
-    await editartransacao(novaTransacao)
-    index = null
+  
+  if(index !== undefined) {
+    const novaTransacao = transacoest[index];
+    await editartransacao(novaTransacao);
+    index = undefined; 
   } else {
-    await edit(transacoest)
+    await edit(transacoest);
   }
+
 }
 
 async function retornarids(transacoest) {
@@ -169,9 +171,43 @@ async function editartransacao(novaTransacao){
  await atualizartabela()
 }
 
+
+
 function obterindex(i){
+  var botao = document.createElement("button");
+  botao.innerHTML = 'Cancelar edição'
   index = i
-}
+
+const addTransactionSection = document.querySelector('#valorfinal');
+const container2 = document.querySelector('.add-transaction');
+const titleadd = document.querySelector('.titleadd')
+const form = document.querySelector('.editcancel')
+
+
+    addTransactionSection.scrollIntoView({
+        behavior: 'smooth', 
+        block: 'start'      
+    });
+
+    container2.classList.remove('add-transaction');
+    container2.classList.add('add-transaction2');
+    botao.classList.add('cancelaredit')
+    form.appendChild(botao)
+    titleadd.innerHTML = 'Editar transação'
+
+    botao.addEventListener('click', ()=>{
+      container2.classList.remove('add-transaction2')
+      container2.classList.add('add-transaction');
+      titleadd.innerHTML = 'Adicionar Transação'
+      botao.remove()
+      index = undefined
+    })
+ 
+
+};
+
+
+
 function verificar(tipo, desc, cate, valor) {
   let verificador = false;
 
@@ -405,6 +441,8 @@ const showOptionsButton = document.getElementById('showOptionsButton');
         });
 
 async function filtrar() {
+
+    
     const buttonolddata = document.getElementById('fdata');
     const idmaiorp = document.getElementById('fmaiorp');
     const idmenorp = document.getElementById('fmenorp');
