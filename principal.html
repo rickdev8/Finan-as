@@ -22,8 +22,8 @@
             <button class="close-btn">X</button>
             <ul>
                 <li><a href="#logo">Início</a></li>
-                <li><a href="#tbody">Histórico</a></li>
-                <li><a href="#categorias">Detalhes</a></li>
+                <li><a href="#titlef">Histórico</a></li>
+                <li><a href="#maioresf">Detalhes</a></li>
                 <li><a href="#relatorios">Gráficos</a></li>
                 <li><a id="guia" href="#guia">Guia de usuário</a></li>
                 <li><a id="sair" href="#categorias">Sair</a></li>
@@ -57,8 +57,8 @@
             <div class="container">
             
                 <div class="add-transaction">
-                    <div class="title">
-                        <h3>Adicionar Transação</h3>
+                    <div id="titlef" class="title">
+                        <h3 class="titleadd" >Adicionar Transação</h3>
                     </div>
         
                     <div class="form" id="addTransactionForm"> 
@@ -96,9 +96,12 @@
                             <button id="adc" onclick="adctransaction()" class="btn">Adicionar</button>
                         </div>
                     </div>
+                    <div class="editcancel">
+
+                    </div>
                 </div>
                 <h2>Histórico de Transações</h2>
-                <div class="titlef">
+                <div id="maioresf" class="titlef">
                             <h2>Filtros</h2>
                         </div>
                         <div class="button-container">
@@ -112,7 +115,6 @@
                         </div>
                 <div class="table-container">
                     <table>
-                    
                     <thead>
                         <tr>
                             <th>Tipo</th>
@@ -185,7 +187,7 @@
         </section>
     </main>
     
-    <footer>
+    <footer id="relatorios">
         <p>&copy; 2024 Monitoramento de Finanças</p>
     </footer>
     <script src="Js/principal.js"></script>
