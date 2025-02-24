@@ -19,12 +19,4 @@ Gráficos: Chart.js para exibição de gráficos de receitas e despesas.
 Como Funciona:
 O sistema permite que o usuário interaja com uma API backend através do frontend. O backend é responsável por fornecer as informações de usuários e transações e por manipular os dados recebidos, utilizando o Prisma para interagir com o banco de dados MongoDB. A API permite as seguintes operações:
 
-GET /usuarios: Retorna todos os usuários cadastrados no banco de dados.
-POST /usuarios: Cria um novo usuário com as transações associadas.
-PUT /usuarios/:id: Atualiza as transações de um usuário, permitindo adicionar novas transações à sua lista de transações.
-PUT /usuarios/:userId/:transacaoId: Atualiza uma transação específica de um usuário.
-DELETE /usuarios/:id: Exclui uma transação de um usuário.
-Fluxo de Dados:
-O frontend (JavaScript) realiza requisições GET, POST, PUT e DELETE para a API backend, que processa as solicitações e interage com o banco de dados MongoDB.
-O Prisma é utilizado para gerenciar as transações, realizando operações de leitura e escrita no banco de dados.
-As transações são armazenadas no banco de dados no formato de um array dentro de cada usuário, permitindo o gerenciamento eficiente de dados.
+
