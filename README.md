@@ -17,6 +17,6 @@ Prisma: ORM (Object-Relational Mapper) para interagir com o banco de dados.
 MongoDB: Banco de dados NoSQL utilizado para armazenar as informações de usuários e transações.
 Gráficos: Chart.js para exibição de gráficos de receitas e despesas.
 Como Funciona:
-O sistema permite que o usuário interaja com uma API backend através do frontend. O backend é responsável por fornecer as informações de usuários e transações e por manipular os dados recebidos, utilizando o Prisma para interagir com o banco de dados MongoDB. A API permite as seguintes operações:
+O sistema permite que o usuário interaja com uma API backend através do frontend. O backend é responsável por fornecer as informações de usuários e transações e por manipular os dados recebidos, utilizando o Prisma para interagir com o banco de dados MongoDB. A API permite um CRUD completo.
 
 
